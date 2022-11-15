@@ -1,14 +1,29 @@
 import Head from 'next/head'
+import { useEffect, useState } from 'react';
+
+import { fetchData } from './api/clientApi';
 
 export default function Home(initialData) {
+  const [formInput, setFormInput] = useState();
+  const [searchResult, setSearchResult] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('nature');
+
+  useEffect(() => {
+    setSearchResult(initialData.gifs.data);
+  }, [initialData]);
+
+  useEffect(() => {
+    fetchData(formInput).then(response => setSearchResult(response.data));
+  }, [searchTerm]);
 
   const handleInputChange = (e) => {
-
-  }
+    setFormInput(e.target.value);
+  };
 
   const search = (e) => {
     e.preventDefault();
-  }
+    setSearchTerm(formInput);
+  };
 
   return (
     <div >
@@ -25,8 +40,10 @@ export default function Home(initialData) {
         <input type='submit' value='Search'/>
       </form>
 
+      <h2>Search results for: {searchTerm}</h2>
+
       <div className='giphy-search-results-grid'>
-      {initialData.gifs.data.map((gif, index) => {
+      {searchResult && searchResult.map((gif, index) => {
           return (
           <figure key={index}>
             <figcaption>{gif.title}</figcaption>
@@ -35,11 +52,11 @@ export default function Home(initialData) {
         })}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export async function getStaticProps() {
-  const apiResponse = await fetch('https://api.giphy.com/v1/gifs/search?q=nature&api_key=RHZN27idONbQeH1U8T7IVQm7LWk5Jcsk&limit=20')
-  const jsoned = await apiResponse.json()
-  return { props: { gifs: jsoned }}
-}
+export function getStaticProps() {
+  return new Promise((resolve, reject) => { 
+    fetchData().then(data => resolve({ props: { gifs: data }}))
+   });
+};
