@@ -1,4 +1,5 @@
-import Head from 'next/head'
+import Head from 'next/head';
+import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
 import { fetchData } from './api/clientApi';
@@ -41,6 +42,14 @@ export default function Home(initialData) {
       </form>
 
       <h2>Search results for: {searchTerm}</h2>
+
+      <p> Share this search 
+        <Link 
+          href="/search/[pid]" 
+          as={`/search/${searchTerm}`}>
+            https://localhost:3000/search/{searchTerm}
+        </Link>
+      </p>
 
       <div className='giphy-search-results-grid'>
       {searchResult && searchResult.map((gif, index) => {
