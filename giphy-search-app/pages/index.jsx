@@ -56,7 +56,12 @@ export default function Home(initialData) {
           return (
           <figure key={index}>
             <figcaption>{gif.title}</figcaption>
-            <img src={gif.images.original.url} alt={gif.title}></img>
+            <img 
+              src={gif.images.original.url} 
+              alt={gif.title}
+              width='550'
+              height='333'
+              loading='lazy'/>
           </figure>);
         })}
       </div>

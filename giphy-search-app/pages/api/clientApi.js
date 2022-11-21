@@ -1,6 +1,6 @@
 const BASE_URL = 'https://api.giphy.com/v1/gifs/';
 const API_KEY = 'api_key=RHZN27idONbQeH1U8T7IVQm7LWk5Jcsk';
-const PAGING = 'limit=10';
+const PAGING = 'limit=40';
 
 export const fetchData = (search) => new Promise((resolve, reject) => {
     let innerSearch = 'nature';
