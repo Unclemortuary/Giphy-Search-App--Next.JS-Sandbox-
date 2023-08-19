@@ -2,6 +2,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { fetchData } from '../api/clientApi';
+import Footer from '../components/Footer';
 
 export default function Search (initialData){
     const router = useRouter();
@@ -9,7 +10,8 @@ export default function Search (initialData){
     return(
         <>
             <Head>
-                <title>Search</title>
+                <title>Search results for: {router.query.searchTerm}</title>
+                <meta name='description' content={initialData.gifs.data.map((each, index) => each.title + ' ')}/>
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <p>Go <Link href='/'>home</Link></p>
@@ -24,6 +26,7 @@ export default function Search (initialData){
                 </figure>);
                 })}
             </div>
+            <Footer/>
         </>
     );
 };
@@ -32,5 +35,5 @@ export function getServerSideProps(context) {
     const searchTerm = context.query.searchTerm;
     return new Promise((resolve, reject) => { 
       fetchData(searchTerm).then(data => resolve({ props: { gifs: data }}))
-     });
-  };
+    });
+};

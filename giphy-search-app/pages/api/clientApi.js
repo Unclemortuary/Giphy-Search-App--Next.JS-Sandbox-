@@ -9,7 +9,8 @@ export const fetchData = (search) => new Promise((resolve, reject) => {
     }
     fetch(`${BASE_URL}search?q=${innerSearch}&${API_KEY}&${PAGING}`)
         .then(data => data.json())
-        .then(jsoned => resolve(jsoned));
+        .then(json => resolve(json))
+        .catch(e => reject(e));
 });
 
 function isInputValid(input) {
