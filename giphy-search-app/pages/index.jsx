@@ -66,7 +66,7 @@ export default function Home(initialData) {
               return (
               <figure key={index}>
                 <figcaption>{gif.title}</figcaption>
-                <img 
+                <Image
                   src={gif.images.original.url} 
                   alt={gif.title}
                   width='550'

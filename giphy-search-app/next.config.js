@@ -1,12 +1,10 @@
 /** @type {import('next').NextConfig} */
-const optimizedImages = require('next-optimized-images');
 
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    disableStaticImages: true,
-    unoptimized: true,
+    domains: ['media2.giphy.com', 'media1.giphy.com', 'media4.giphy.com', 'media3.giphy.com', 'media0.giphy.com']
   }
 }
 
-module.exports = optimizedImages(nextConfig)
+module.exports = nextConfig

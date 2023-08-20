@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { fetchData } from '../api/clientApi';
 import Footer from '../components/Footer';
@@ -22,7 +23,13 @@ export default function Search (initialData){
                 return (
                 <figure key={index}>
                     <figcaption>{gif.title}</figcaption>
-                    <img src={gif.images.original.url} alt={gif.title}></img>
+                    <Image
+                        src={gif.images.original.url}
+                        alt={gif.title}
+                        width='550'
+                        height='333'
+                        loading='lazy'
+                    />
                 </figure>);
                 })}
             </div>
